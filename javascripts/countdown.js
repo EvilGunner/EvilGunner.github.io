@@ -99,14 +99,6 @@ function updateBalls () {
 			ball.y = WINDOW_HEIGHT-RADIUS;
 			ball.vy = - ball.vy*0.8;
 		}
-		// if (ball.x >= WINDOW_WIDTH-RADIUS) {
-		// 	ball.x = WINDOW_WIDTH-RADIUS;
-		// 	ball.vx = -ball.vx*0.8;
-		// }
-		// if (ball.x <= RADIUS) {
-		// 	ball.x = RADIUS;
-		// 	ball.vx = -ball.vx*0.8;
-		// }
 	}
 
 	var cnt = 0;
@@ -131,7 +123,7 @@ function addBalls (x,y,num) {
 						x:x+j*2*(RADIUS+1)+(RADIUS+1),
 						y:y+i*2*(RADIUS+1)+(RADIUS+1),
 						g:1.5+Math.random(),
-						vx:Math.pow(-1,Math.ceil(Math.random()*1000))*(Math.ceil(Math.random()*10)),
+						vx:Math.pow(-1,Math.ceil(Math.random()*1000))*(3+Math.ceil(Math.random()*10)),
 						vy:-1*Math.round(Math.random()*10),
 						color:colors[Math.floor(Math.random()*10)]
 					}
