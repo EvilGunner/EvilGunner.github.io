@@ -131,7 +131,7 @@ function addBalls (x,y,num) {
 						x:x+j*2*(RADIUS+1)+(RADIUS+1),
 						y:y+i*2*(RADIUS+1)+(RADIUS+1),
 						g:1.5+Math.random(),
-						vx:Math.pow(-1,Math.ceil(Math.random()*1000))*(Math.round(Math.random()*10)),
+						vx:Math.pow(-1,Math.ceil(Math.random()*1000))*(Math.ceil(Math.random()*10)),
 						vy:-1*Math.round(Math.random()*10),
 						color:colors[Math.floor(Math.random()*10)]
 					}
