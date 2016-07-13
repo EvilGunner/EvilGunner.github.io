@@ -4,13 +4,21 @@ var RADIUS = 8;
 var MARGIN_TOP = 60;
 var MARGIN_LEFT = 30;
 
-const endTime = new Date(2016,6,13,18,47,52);
+// var endTime = new Date();
+// endTime.setTime(endTime.getTime()+3600*1000);
 var curShowTimeSeconds = 0;
 
 var balls = [];
 const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC000C"];
 window.onload = function () {
 	
+	// 屏幕自适应
+	WINDOW_WIDTH = document.documentElement.clientWidth;
+	WINDOW_HEIGHT = document.documentElement.clientHeight;
+	MARGIN_LEFT = Math.round(WINDOW_WIDTH/10);
+	RADIUS = Math.round(WINDOW_WIDTH*4/5/108)-1;
+	MARGIN_TOP = Math.round(WINDOW_HEIGHT/5);
+
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d');
 
@@ -31,9 +39,11 @@ window.onload = function () {
 
 function getCurShowTimeSeconds () {
 	var currentTime = new Date();
-	var ret = endTime.getTime() - currentTime.getTime();
-	ret = Math.round(ret/1000);
-	return ret >= 0 ? ret : 0;
+	// var ret = endTime.getTime() - currentTime.getTime();
+	// ret = Math.round(ret/1000);
+	var ret = currentTime.getHours() * 3600 + currentTime.getMinutes() * 60 + currentTime.getSeconds();
+	// return ret >= 0 ? ret : 0;
+	return ret;
 }
 
 function update () {
@@ -89,14 +99,26 @@ function updateBalls () {
 			ball.y = WINDOW_HEIGHT-RADIUS;
 			ball.vy = - ball.vy*0.8;
 		}
-		if (ball.x >= WINDOW_WIDTH-RADIUS) {
-			ball.x = WINDOW_WIDTH-RADIUS;
-			ball.vx = -ball.vx*0.8;
+		// if (ball.x >= WINDOW_WIDTH-RADIUS) {
+		// 	ball.x = WINDOW_WIDTH-RADIUS;
+		// 	ball.vx = -ball.vx*0.8;
+		// }
+		// if (ball.x <= RADIUS) {
+		// 	ball.x = RADIUS;
+		// 	ball.vx = -ball.vx*0.8;
+		// }
+	}
+
+	var cnt = 0;
+	for (var i = 0; i < balls.length; i++) {
+		var ball = balls[i];
+		if (ball.x + RADIUS > 0 && ball.x - RADIUS < WINDOW_WIDTH) {
+			balls[cnt++] = ball;
 		}
-		if (ball.x <= RADIUS) {
-			ball.x = RADIUS;
-			ball.vx = -ball.vx*0.8;
-		};
+	}
+
+	while(balls.length > Math.min(300,cnt)) {
+		balls.pop();
 	}
 }
 
